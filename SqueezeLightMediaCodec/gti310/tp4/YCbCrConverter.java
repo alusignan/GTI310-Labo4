@@ -32,8 +32,8 @@ public class YCbCrConverter {
 		for (int i = 0; i < inputPPM[INDEX_NUMBER].length; i++) {
 			for (int j = 0; j < inputPPM[INDEX_NUMBER].length; j++) {
 				yCbCrArray[Main.Y][i][j] = (double)((inputPPM[Main.R][i][j] * 0.299)+(inputPPM[Main.G][i][j] * 0.587)+(inputPPM[Main.B][i][j] * 0.114));
-				yCbCrArray[Main.Cb][i][j] = (double)((inputPPM[Main.R][i][j] * -0.168736)+(inputPPM[Main.G][i][j] * -0.331264)+(inputPPM[Main.B][i][j] * 0.5));
-				yCbCrArray[Main.Cr][i][j] = (double)((inputPPM[Main.R][i][j] * 0.5)+(inputPPM[Main.G][i][j] * -0.418688)+(inputPPM[Main.B][i][j] * -0.081312));
+				yCbCrArray[Main.Cb][i][j] = (double)(128+((inputPPM[Main.R][i][j] * -0.168736)+(inputPPM[Main.G][i][j] * -0.331264)+(inputPPM[Main.B][i][j] * 0.5)));
+				yCbCrArray[Main.Cr][i][j] = (double)(128+((inputPPM[Main.R][i][j] * 0.5)+(inputPPM[Main.G][i][j] * -0.418688)+(inputPPM[Main.B][i][j] * -0.081312)));
 			}	
 		}
 	}
