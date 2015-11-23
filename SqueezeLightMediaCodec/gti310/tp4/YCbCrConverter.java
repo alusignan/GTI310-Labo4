@@ -28,7 +28,9 @@ public class YCbCrConverter {
 		//inputSZL = SZLReaderWriter.readSZLFile(inputPPMFile);
 	}
 	
-	
+	/**Fonction pour encoder une image RGB en YCbCr
+	 * Complexité O(N^2)
+	 * **/
 	public void encode() {
 		double[][][] yCbCrImage = new double[Main.COLOR_SPACE_SIZE][inputPPM[INDEX_NUMBER].length][inputPPM[INDEX_NUMBER].length];
 	
@@ -41,7 +43,9 @@ public class YCbCrConverter {
 			}	
 		}
 	}
-	/**Source : https://en.wikipedia.org/wiki/YUV**/
+	/**Source : https://en.wikipedia.org/wiki/YUV
+	 * Fonction pour décoder une image YCbCr en RGB
+	 * Complexité O(N^2)**/
 	public int[][][] decode() {
 		int[][][] RGBimage = new int[Main.COLOR_SPACE_SIZE][inputPPM[INDEX_NUMBER].length][inputPPM[INDEX_NUMBER].length];
 		int R = 0;
@@ -60,6 +64,7 @@ public class YCbCrConverter {
 				G = (int)(inputPPM[Main.Y][i][j] - 0.344 * (inputPPM[Main.Cb][i][j] - 128) - 0.714 * (inputPPM[Main.Cr][i][j] - 128));
 				B = (int)(inputPPM[Main.Y][i][j] + 1.772 * (inputPPM[Main.Cb][i][j] - 128));
 				
+				//Validation inspiré de : http://stackoverflow.com/questions/4041840/function-to-convert-ycbcr-to-rgb
                 R = (R<0 ? 0 :( R > 255 ? 255 : R) );
                 G = (G<0 ? 0 :( G > 255 ? 255 : G) );
                 B = (B<0 ? 0 :( B > 255 ? 255 : B) );
