@@ -1,6 +1,6 @@
 package gti310.tp4;
 
-public class YCbCrConverter {
+public class ColorManager {
 	
 	private static final int INDEX_NUMBER = 0;
 	private int inputPPM[][][];
@@ -12,7 +12,7 @@ public class YCbCrConverter {
 	
 
 	//First constructor for program number 1
-	public YCbCrConverter(int quality, String inputPPMFile, String outputFile) {
+	public ColorManager(int quality, String inputPPMFile, String outputFile) {
 		inputPPM = PPMReaderWriter.readPPMFile(inputPPMFile);
 		this.qualityFactor = quality;
 		//PPMReaderWriter.writePPMFile(outputFile, output);
@@ -20,7 +20,7 @@ public class YCbCrConverter {
 	
 	/**Il va falloir ajuster pour que ce soit en fonction d'un fichier SZL plus tard**/
 	//Second constructor for program number 2
-	public YCbCrConverter(String inputPPMFile, String outputFile) {
+	public ColorManager(String inputPPMFile, String outputFile) {
 		inputPPM = PPMReaderWriter.readPPMFile(inputPPMFile);
 		encode();
 		outputPPM = decode();
@@ -36,7 +36,7 @@ public class YCbCrConverter {
 	
 		for (int i = 0; i < inputPPM[INDEX_NUMBER].length; i++) {
 			for (int j = 0; j < inputPPM[INDEX_NUMBER][INDEX_NUMBER].length; j++) {
-				yCbCrImage[Main.Y][i][j] = (int)(16+(inputPPM[Main.R][i][j] * 0.299)+(inputPPM[Main.G][i][j] * 0.587)+(inputPPM[Main.B][i][j] * 0.114));
+				yCbCrImage[Main.Y][i][j] = (int)((inputPPM[Main.R][i][j] * 0.299)+(inputPPM[Main.G][i][j] * 0.587)+(inputPPM[Main.B][i][j] * 0.114));
 				yCbCrImage[Main.Cb][i][j] = (int)(128+((inputPPM[Main.R][i][j] * -0.168736)+(inputPPM[Main.G][i][j] * -0.331264)+(inputPPM[Main.B][i][j] * 0.5)));
 				yCbCrImage[Main.Cr][i][j] = (int)(128+((inputPPM[Main.R][i][j] * 0.5)+(inputPPM[Main.G][i][j] * -0.418688)+(inputPPM[Main.B][i][j] * -0.081312)));
 				
@@ -47,7 +47,7 @@ public class YCbCrConverter {
 	 * Fonction pour décoder une image YCbCr en RGB
 	 * Complexité O(N^2)**/
 	public int[][][] decode() {
-		int[][][] RGBimage = new int[Main.COLOR_SPACE_SIZE][inputPPM[INDEX_NUMBER].length][inputPPM[INDEX_NUMBER].length];
+		int[][][] RGBimage = new int[Main.COLOR_SPACE_SIZE][inputPPM[INDEX_NUMBER].length][inputPPM[INDEX_NUMBER][INDEX_NUMBER].length];
 		int R = 0;
 		int G = 0;
 		int B = 0;
@@ -61,7 +61,7 @@ public class YCbCrConverter {
 				
 				/*Trop de vert ??*/
 				R = (int)(inputPPM[Main.Y][i][j] + 1.402 * (inputPPM[Main.Cr][i][j] - 128));
-				G = (int)(inputPPM[Main.Y][i][j] - 0.344 * (inputPPM[Main.Cb][i][j] - 128) - 0.714 * (inputPPM[Main.Cr][i][j] - 128));
+				G = (int)(inputPPM[Main.Y][i][j] - (0.344 * (inputPPM[Main.Cb][i][j] - 128)) - (0.714 * (inputPPM[Main.Cr][i][j] - 128)));
 				B = (int)(inputPPM[Main.Y][i][j] + 1.772 * (inputPPM[Main.Cb][i][j] - 128));
 				
 				//Validation inspiré de : http://stackoverflow.com/questions/4041840/function-to-convert-ycbcr-to-rgb

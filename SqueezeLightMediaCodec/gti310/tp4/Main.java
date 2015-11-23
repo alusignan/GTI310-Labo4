@@ -42,7 +42,7 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
 		
-		YCbCrConverter converter = new YCbCrConverter(args[0],args[1]);
+		ColorManager converter = new ColorManager(args[0],args[1]);
 		converter.encode();
 		converter.decode();
 		
