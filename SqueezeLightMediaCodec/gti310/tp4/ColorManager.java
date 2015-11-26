@@ -31,17 +31,21 @@ public class ColorManager {
 	/**Fonction pour encoder une image RGB en YCbCr
 	 * Complexité O(N^2)
 	 * **/
-	public void encode() {
-		double[][][] yCbCrImage = new double[Main.COLOR_SPACE_SIZE][inputPPM[INDEX_NUMBER].length][inputPPM[INDEX_NUMBER].length];
+	public float[][][] encode() {
+		float[][][] yCbCrImage = new float[Main.COLOR_SPACE_SIZE][inputPPM[INDEX_NUMBER].length][inputPPM[INDEX_NUMBER].length];
 	
 		for (int i = 0; i < inputPPM[INDEX_NUMBER].length; i++) {
 			for (int j = 0; j < inputPPM[INDEX_NUMBER][INDEX_NUMBER].length; j++) {
-				yCbCrImage[Main.Y][i][j] = (int)((inputPPM[Main.R][i][j] * 0.299)+(inputPPM[Main.G][i][j] * 0.587)+(inputPPM[Main.B][i][j] * 0.114));
-				yCbCrImage[Main.Cb][i][j] = (int)(128+((inputPPM[Main.R][i][j] * -0.168736)+(inputPPM[Main.G][i][j] * -0.331264)+(inputPPM[Main.B][i][j] * 0.5)));
-				yCbCrImage[Main.Cr][i][j] = (int)(128+((inputPPM[Main.R][i][j] * 0.5)+(inputPPM[Main.G][i][j] * -0.418688)+(inputPPM[Main.B][i][j] * -0.081312)));
+				yCbCrImage[Main.Y][i][j] = (float)((inputPPM[Main.R][i][j] * 0.299)+(inputPPM[Main.G][i][j] * 0.587)+(inputPPM[Main.B][i][j] * 0.114));
+				yCbCrImage[Main.Cb][i][j] = (float)(128+((inputPPM[Main.R][i][j] * -0.168736)+(inputPPM[Main.G][i][j] * -0.331264)+(inputPPM[Main.B][i][j] * 0.5)));
+				yCbCrImage[Main.Cr][i][j] = (float)(128+((inputPPM[Main.R][i][j] * 0.5)+(inputPPM[Main.G][i][j] * -0.418688)+(inputPPM[Main.B][i][j] * -0.081312)));
 				
+//				yCbCrImage[Main.Y][i][j] = (float) ((inputPPM[Main.R][i][j] * 0.299)+ (inputPPM[Main.G][i][j] * 0.587)+(inputPPM[Main.B][i][j] * 0.114));
+//				yCbCrImage[Main.Cb][i][j] = (float) (0.492*((inputPPM[Main.B][i][j])-(yCbCrImage[Main.Y][i][j])));
+//				yCbCrImage[Main.Cr][i][j] = (float) (0.877*((inputPPM[Main.R][i][j])-(yCbCrImage[Main.Y][i][j])));
 			}	
 		}
+		return yCbCrImage;
 	}
 	/**Source : https://en.wikipedia.org/wiki/YUV
 	 * Fonction pour décoder une image YCbCr en RGB
