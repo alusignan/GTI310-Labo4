@@ -3,6 +3,7 @@ package gti310.tp4;
 public class BlockManager {
 	private int[][][] imageArray;
 	int[][][] blockArray = new int[Main.COLOR_SPACE_SIZE][Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+	
 	//Variable pour garder en mémoire la position à découper dans l'image (où on est rendu).
 	private int actualWidth, actualHeight;
 	

@@ -43,8 +43,8 @@ public class Main {
 		System.out.println("Squeeze Light Media Codec !");
 		
 		ColorManager converter = new ColorManager(args[0],args[1]);
-		converter.encode();
-		converter.decode();
+//		converter.encode();
+//		converter.decode();
 		
 		
 	}
