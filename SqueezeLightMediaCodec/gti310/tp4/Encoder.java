@@ -4,6 +4,8 @@ public class Encoder {
 	
 	private int[][][] rgbImage, testColorManager;
 	private float[][][] yCbCrImage, blocks;
+	private float[][] dctY, dctCb, dctCr;
+
 	
 	public Encoder(String inputFile, String outputFile, int quality) {
 		
@@ -32,7 +34,14 @@ public class Encoder {
 				//Création des blocs
 				blocks = BlockManager.splitImage(yCbCrImage, i, j);
 				
-				//Calculer la DCT sur les blocs
+				//Calculer la DCT sur les blocs YCbCr
+				dctY = DCTManager.forwarDCT(blocks, Main.Y);
+				dctCb = DCTManager.forwarDCT(blocks, Main.Cb);
+				dctCr = DCTManager.forwarDCT(blocks, Main.Cr);
+				
+				//Pourrait tester la DCT inverse
+				
+				
 			}
 		}
 				

@@ -26,7 +26,7 @@ public class DCTManager {
 	}
 	
 	/**Complexité O(N^4)**/
-	public static float[][] inverseDCT(float[][][] block, int layer) {
+	public static float[][] reverseDCT(float[][][] block, int layer) {
 		initializeCoefficients();
 		float[][] F = new float[N][N];
 		for (int i = 0; i < N; i++) {
