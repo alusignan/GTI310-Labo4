@@ -3,36 +3,12 @@ package gti310.tp4;
 public class ColorManager {
 	
 	private static final int INDEX_NUMBER = 0;
-	private int inputPPM[][][];
-	private float[][][] testConverter;
-	private int[][][] outputPPM;
-	private int inputSZL[];
-	private int outputSZL[];
-	private int qualityFactor;
 	
-	
-
-	//First constructor for program number 1
-	public ColorManager(int quality, String inputPPMFile, String outputFile) {
-		inputPPM = PPMReaderWriter.readPPMFile(inputPPMFile);
-		this.qualityFactor = quality;
-		//PPMReaderWriter.writePPMFile(outputFile, output);
-	}
-	
-	/**Il va falloir ajuster pour que ce soit en fonction d'un fichier SZL plus tard**/
-	//Second constructor for program number 2
-	public ColorManager(String inputPPMFile, String outputFile) {
-		inputPPM = PPMReaderWriter.readPPMFile(inputPPMFile);
-		testConverter = encode(inputPPM);
-		outputPPM = decode(testConverter);
-		PPMReaderWriter.writePPMFile(outputFile, outputPPM);
-		//inputSZL = SZLReaderWriter.readSZLFile(inputPPMFile);
-	}
 	
 	/**Fonction pour encoder une image RGB en YCbCr
 	 * Complexité O(N^2)
 	 * **/
-	public float[][][] encode(int[][][] RGBimage) {
+	public static float[][][] encode(int[][][] RGBimage) {
 		float[][][] yCbCrImage = new float[Main.COLOR_SPACE_SIZE][RGBimage[INDEX_NUMBER].length][RGBimage[INDEX_NUMBER].length];
 	
 		for (int i = 0; i < RGBimage[INDEX_NUMBER].length; i++) {
@@ -77,7 +53,7 @@ public class ColorManager {
 	/**Source : https://en.wikipedia.org/wiki/YUV
 	 * Fonction pour décoder une image YCbCr en RGB
 	 * Complexité O(N^2)**/
-	public int[][][] decode(float[][][] YCbCrImage) {
+	public static int[][][] decode(float[][][] YCbCrImage) {
 		int[][][] RGBimage = new int[Main.COLOR_SPACE_SIZE][YCbCrImage[INDEX_NUMBER].length][YCbCrImage[INDEX_NUMBER][INDEX_NUMBER].length];
 		int R = 0;
 		int G = 0;
