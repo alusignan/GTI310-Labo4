@@ -7,10 +7,10 @@ public class Encoder {
 	
 	public Encoder(String inputFile, String outputFile, int quality) {
 		
-		//On lit le fichier
+		//On lit le fichier image
 		rgbImage = PPMReaderWriter.readPPMFile(inputFile);
 		
-		//On le convertit en YCbCr
+		//On fait la conversion en YCbCr
 		yCbCrImage = ColorManager.encode(rgbImage);
 		
 		//Ici on teste le décodeur
@@ -26,8 +26,8 @@ public class Encoder {
 		
 		
 		
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; i < width; i++) {
+		for (int i = 1; i <= height; i++) {
+			for (int j = 1; i <= width; i++) {
 				
 				//Création des blocs
 				blocks = BlockManager.splitImage(yCbCrImage, i, j);
