@@ -28,31 +28,25 @@ public class Encoder {
 		int width = yCbCrImage[0][0].length;
 		
 		
-		
 		for (int i = 1; i <= height; i++) {
 			for (int j = 1; i <= width; i++) {
-				
-				//Création des blocs
-				blocks = BlockManager.splitImage(yCbCrImage, i, j);
-				
-				//Calculer la DCT sur les blocs YCbCr
-				dctY = DCTManager.forwarDCT(blocks, Main.Y);
-				dctCb = DCTManager.forwarDCT(blocks, Main.Cb);
-				dctCr = DCTManager.forwarDCT(blocks, Main.Cr);
-				
-				//Pourrait tester la DCT inverse
-				
-				//Quantification
-				quantifiedY = QuantizeManager.quantize(dctY, Main.Y, quality);
-				quantifiedCb = QuantizeManager.quantize(dctCb, Main.Cb, quality);
-				quantifiedCr = QuantizeManager.quantize(dctCr, Main.Cr, quality);
-				
-				
+				if ((i % 8 == 0) && (j % 8 == 0)) {
+					//Création des blocs
+					blocks = BlockManager.splitImage(yCbCrImage, i, j);
+					
+					//Calculer la DCT sur les blocs YCbCr
+					dctY = DCTManager.forwarDCT(blocks, Main.Y);
+					dctCb = DCTManager.forwarDCT(blocks, Main.Cb);
+					dctCr = DCTManager.forwarDCT(blocks, Main.Cr);
+					
+					//Pourrait tester la DCT inverse
+					
+					//Quantification
+					quantifiedY = QuantizeManager.quantize(dctY, Main.Y, quality);
+					quantifiedCb = QuantizeManager.quantize(dctCb, Main.Cb, quality);
+					quantifiedCr = QuantizeManager.quantize(dctCr, Main.Cr, quality);	
+				}
 			}
-		}
-				
-
-		
+		}	
 	}
-
 }

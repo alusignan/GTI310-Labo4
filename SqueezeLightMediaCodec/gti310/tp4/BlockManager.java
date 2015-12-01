@@ -8,16 +8,13 @@ public class BlockManager {
 	 * O(N^2) **/
 	//Divide image in single 8x8 blocks
 	public static float[][][] splitImage(float[][][] image, int height, int width) {
-		if ((width%8 == 0) && (height%8 == 0)) {
-			for (int i = 0; i < Main.BLOCK_SIZE; i++) {
-				for (int j = 0; j < Main.BLOCK_SIZE; j++) {
-					blockArray[Main.Y][i][j] = image[Main.Y][i+height][j+width];
-					blockArray[Main.Cb][i][j] = image[Main.Cb][i+height][j+width];
-					blockArray[Main.Cr][i][j] = image[Main.Cr][i+height][j+width];
-				}
+		for (int i = 0; i < Main.BLOCK_SIZE; i++) {
+			for (int j = 0; j < Main.BLOCK_SIZE; j++) {
+				blockArray[Main.Y][i][j] = image[Main.Y][i+height][j+width];
+				blockArray[Main.Cb][i][j] = image[Main.Cb][i+height][j+width];
+				blockArray[Main.Cr][i][j] = image[Main.Cr][i+height][j+width];
 			}
 		}
-		
 		return blockArray;
 	}
 	
