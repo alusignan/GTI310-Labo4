@@ -18,8 +18,8 @@ public class DCTManager {
 						sum += Math.cos(((2 * i + 1) / (2 * N)) * u * Math.PI) * Math.cos(((2 * j + 1) ) / (2 * N) * v * Math.PI) * block[layer][i][j];
 					}
 				}
-			sum *= ((C[u] * C[v]) / 4);
-			F[u][v] = sum;
+				sum *= ((C[u] * C[v]) / 4);
+				F[u][v] = sum;
 			}
 		}
 		return F;
@@ -48,6 +48,6 @@ public class DCTManager {
 		for (int i = 1; i < N; i++) {
 			C[i] = 1;
 		}
-		C[0] = (float) (1/Math.sqrt(2.0));
+		C[0] = (float) (1/Math.sqrt(2));
 	} 
 }

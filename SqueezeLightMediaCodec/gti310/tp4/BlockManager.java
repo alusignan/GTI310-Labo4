@@ -4,9 +4,6 @@ public class BlockManager {
 
 	static float [][][] blockArray = new float[Main.COLOR_SPACE_SIZE][Main.BLOCK_SIZE][Main.BLOCK_SIZE];
 	
-	
-
-	
 	/**On va appeler cette méthode plusieurs fois lors de la conversion
 	 * O(N^2) **/
 	//Divide image in single 8x8 blocks
@@ -22,6 +19,11 @@ public class BlockManager {
 		}
 		
 		return blockArray;
+	}
+	
+	public static float[][][] mergeBlocks(float[][] block, int height, int width) {
+		/*Trouver comment faire un merge des blocs ensemble...*/
+		return null;
 	}
 
 

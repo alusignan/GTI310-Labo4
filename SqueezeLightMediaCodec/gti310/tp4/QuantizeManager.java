@@ -26,7 +26,8 @@ public class QuantizeManager {
 			{95, 95, 95, 95, 95, 95, 95, 95},
 	};
 	
-	/**Complexité en O(N^2)**/
+	/** Quantification
+	 * Complexité en O(N^2)**/
 	public static int[][] quantize(float[][] matrix, int layer, int quality) {
 		int[][] F = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
 		
@@ -73,6 +74,58 @@ public class QuantizeManager {
 			}
 		}
 		//Retourne la nouvelle matrice 8x8 quantifié
+		return F;
+	}
+	
+	
+	/**Déquantification
+	 * Complexité en O(N^2)**/
+	public static float[][] dequantize(float[][] matrix, int layer, int quality) {
+		float[][] F = new float[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+		
+		//Pour la couche Y
+		if (layer == 0) {
+			for (int u = 0; u < Main.BLOCK_SIZE; u++) {
+				for (int v = 0; v < Main.BLOCK_SIZE; v++) {
+					//Facteur entre 1 et 50
+					if ((quality >= 1) && (quality <= 50 )) {
+						float a = 50 / quality;
+						F[u][v] = Math.round((matrix[u][v]) * (a  * QY[u][v]));
+					}
+					//Facteur entre 51 et 99
+					else if ((quality >= 51) && (quality <= 99)) {
+						float a = ((200 - 2 * quality) / 100);
+						F[u][v] = Math.round((matrix[u][v]) * (a  * QY[u][v]));
+					}
+					//Facteur 100 loseless JPEG
+					else if (quality == 100) {
+						F[u][v] = QY[u][v];
+					}
+				}
+			}
+		}
+		//Pour les couches Cb et Cr
+		else {
+			for (int u = 0; u < Main.BLOCK_SIZE; u++) {
+				for (int v = 0; v < Main.BLOCK_SIZE; v++) {
+					//Facteur entre 1 et 50
+					if ((quality >= 1) && (quality <= 50 )) {
+						float a = 50 / quality;
+						F[u][v] = Math.round((matrix[u][v]) * (a  * QCbCr[u][v]));
+					}
+					//Facteur entre 51 et 99
+					else if ((quality >= 51) && (quality <= 99)) {
+						float a = ((200 - 2 * quality) / 100);
+						F[u][v] = Math.round((matrix[u][v]) * (a  * QCbCr[u][v]));
+					}
+					//Facteur de 100 loseless JPEG
+					else if (quality == 100) {
+						F[u][v] = QCbCr[u][v];
+					}
+				}
+			}
+		}
+		//Retourne la nouvelle matrice 8x8 déquantifié
 		return F;
 	}
 	
