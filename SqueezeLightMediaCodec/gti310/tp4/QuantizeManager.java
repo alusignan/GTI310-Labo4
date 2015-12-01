@@ -2,7 +2,7 @@ package gti310.tp4;
 
 public class QuantizeManager {
 	
-	public static final float[][] QY = {
+	public static final int[][] QY = {
 			{16, 40, 40, 40, 40, 40, 51, 61},
 			{40, 40, 40, 40, 40, 58, 60, 55},
 			{40, 40, 40, 40, 40, 57, 69, 56},
@@ -13,7 +13,7 @@ public class QuantizeManager {
 			{72, 92, 95, 98, 112, 100, 103, 95}
 	};
 	
-	public static final float[][] QCbCr = {
+	public static final int[][] QCbCr = {
 			{17, 40, 40, 95, 95, 95, 95, 95},
 			{40, 40, 40, 95, 95, 95, 95, 95},
 			{40, 40, 40, 95, 95, 95, 95, 95},
@@ -38,7 +38,10 @@ public class QuantizeManager {
 					else if ((quality >= 51) && (quality <= 99)) {
 						float a = ((200 - 2 * quality) / 100);
 						F[u][v] = Math.round((matrix[u][v]) / (a  * QY[u][v]));
-					}	
+					}
+					else if (quality == 100) {
+						F[u][v] = QY[u][v];
+					}
 				}
 			}
 		}
@@ -52,6 +55,9 @@ public class QuantizeManager {
 					else if ((quality >= 51) && (quality <= 99)) {
 						float a = ((200 - 2 * quality) / 100);
 						F[u][v] = Math.round((matrix[u][v]) / (a  * QCbCr[u][v]));
+					}
+					else if (quality == 100) {
+						F[u][v] = QCbCr[u][v];
 					}
 				}
 			}

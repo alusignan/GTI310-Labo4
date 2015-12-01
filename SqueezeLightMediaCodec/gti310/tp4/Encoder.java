@@ -5,6 +5,7 @@ public class Encoder {
 	private int[][][] rgbImage, testColorManager;
 	private float[][][] yCbCrImage, blocks;
 	private float[][] dctY, dctCb, dctCr;
+	private int[][] quantifiedY, quantifiedCb, quantifiedCr;
 
 	
 	public Encoder(String inputFile, String outputFile, int quality) {
@@ -40,6 +41,11 @@ public class Encoder {
 				dctCr = DCTManager.forwarDCT(blocks, Main.Cr);
 				
 				//Pourrait tester la DCT inverse
+				
+				//Quantification
+				quantifiedY = QuantizeManager.quantize(dctY, Main.Y, quality);
+				quantifiedCb = QuantizeManager.quantize(dctCb, Main.Cb, quality);
+				quantifiedCr = QuantizeManager.quantize(dctCr, Main.Cr, quality);
 				
 				
 			}
