@@ -19,7 +19,11 @@ public class BlockManager {
 	}
 	
 	public static float[][][] mergeBlocks(float[][] block, int height, int width) {
-		/*Trouver comment faire un merge des blocs ensemble...*/
+		for (int i = 0; i < Main.BLOCK_SIZE; i++) {
+			for (int j = 0; j < Main.BLOCK_SIZE; j++) {
+				
+			}
+		}
 		return null;
 	}
 

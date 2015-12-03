@@ -4,12 +4,12 @@ package gti310.tp4;
 public class ZigZagManager {
 	
 	/**Complexité O(N)**/
-	public int[][] zigzag(int[][] quantizeBlock) {
-		int[][] data = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+	public static int[] zigzag(int[][] quantizeBlock) {
+		int[] data = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
 		int i = 1;
 		int j = 1;
 		for (int element = 0; element < Main.BLOCK_SIZE * Main.BLOCK_SIZE; element++) {
-			data[i-1][j-1] = element;
+			data[element] = quantizeBlock[i-1][j-1];
 			if ((i + j) % 2 == 0) {
 				//Even stripes
 				if (j < Main.BLOCK_SIZE) {
@@ -39,7 +39,7 @@ public class ZigZagManager {
 		return data;
 	}
 	
-	public int[][] gazgiz(int[][] ACDCMatrix) {
+	public static int[][] gazgiz(int[][] ACDCMatrix) {
 		return null;
 	}
 

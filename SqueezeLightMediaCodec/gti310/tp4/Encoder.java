@@ -1,11 +1,14 @@
 package gti310.tp4;
 
+import java.util.ArrayList;
+
 public class Encoder {
 	
 	private int[][][] rgbImage, testColorManager;
 	private float[][][] yCbCrImage, blocks;
 	private float[][] dctY, dctCb, dctCr;
 	private int[][] quantifiedY, quantifiedCb, quantifiedCr;
+	private ArrayList<int[]> zigZagList;
 
 	
 	public Encoder(String inputFile, String outputFile, int quality) {
@@ -45,6 +48,19 @@ public class Encoder {
 					quantifiedY = QuantizeManager.quantize(dctY, Main.Y, quality);
 					quantifiedCb = QuantizeManager.quantize(dctCb, Main.Cb, quality);
 					quantifiedCr = QuantizeManager.quantize(dctCr, Main.Cr, quality);
+					
+					//ZigZag
+					int[] zigzagY = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
+					int[] zigzagCb = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
+					int[] zigzagCr = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
+					
+					zigzagY = ZigZagManager.zigzag(quantifiedY);
+					zigzagCb = ZigZagManager.zigzag(quantifiedCb);
+					zigzagCr = ZigZagManager.zigzag(quantifiedCr);
+					
+					zigZagList.add(zigzagY);
+					zigZagList.add(zigzagCb);
+					zigZagList.add(zigzagCr);
 					
 					
 				}
