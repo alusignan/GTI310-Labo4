@@ -44,7 +44,9 @@ public class Encoder {
 					//Quantification
 					quantifiedY = QuantizeManager.quantize(dctY, Main.Y, quality);
 					quantifiedCb = QuantizeManager.quantize(dctCb, Main.Cb, quality);
-					quantifiedCr = QuantizeManager.quantize(dctCr, Main.Cr, quality);	
+					quantifiedCr = QuantizeManager.quantize(dctCr, Main.Cr, quality);
+					
+					
 				}
 			}
 		}	
