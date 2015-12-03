@@ -1,9 +1,10 @@
 package gti310.tp4;
 
 /**Source : http://rosettacode.org/wiki/Zig-zag_matrix#Java**/
-public class ZigZagTop {
+public class ZigZagManager {
 	
-	public int[][] process(int[][] quantizeBlock) {
+	/**Complexité O(N)**/
+	public int[][] zigzag(int[][] quantizeBlock) {
 		int[][] data = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
 		int i = 1;
 		int j = 1;
@@ -38,7 +39,7 @@ public class ZigZagTop {
 		return data;
 	}
 	
-	public int[][] unprocess(int[][] ACDCMatrix) {
+	public int[][] gazgiz(int[][] ACDCMatrix) {
 		return null;
 	}
 
