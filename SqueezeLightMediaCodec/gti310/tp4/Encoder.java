@@ -32,7 +32,7 @@ public class Encoder {
 		
 		
 		for (int i = 1; i <= height; i++) {
-			for (int j = 1; i <= width; i++) {
+			for (int j = 1; j <= width; j++) {
 				if ((i % 8 == 0) && (j % 8 == 0)) {
 					//Création des blocs
 					blocks = BlockManager.splitImage(yCbCrImage, i, j);
