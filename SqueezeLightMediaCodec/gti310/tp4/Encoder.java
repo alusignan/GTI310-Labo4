@@ -8,7 +8,7 @@ public class Encoder {
 	private float[][][] yCbCrImage, blocks;
 	private float[][] dctY, dctCb, dctCr;
 	private int[][] quantifiedY, quantifiedCb, quantifiedCr;
-	private ArrayList<int[]> zigZagList;
+	private ArrayList<int[]> zigZagList = new ArrayList<int[]>();
 
 	
 	public Encoder(String inputFile, String outputFile, int quality) {
@@ -20,10 +20,10 @@ public class Encoder {
 		yCbCrImage = ColorManager.encode(rgbImage);
 		
 		//Ici on teste le décodeur
-		testColorManager = ColorManager.decode(yCbCrImage);
+		//testColorManager = ColorManager.decode(yCbCrImage);
 		
 		//Ici on enregistre le fichier qui sort du décodeur
-		PPMReaderWriter.writePPMFile(outputFile, testColorManager);
+		//PPMReaderWriter.writePPMFile(outputFile, testColorManager);
 		
 		
 		//Longueur et Largeur de l'image pour boucler
@@ -31,8 +31,8 @@ public class Encoder {
 		int width = yCbCrImage[0][0].length;
 		
 		
-		for (int i = 1; i <= height; i++) {
-			for (int j = 1; j <= width; j++) {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
 				if ((i % 8 == 0) && (j % 8 == 0)) {
 					//Création des blocs
 					blocks = BlockManager.splitImage(yCbCrImage, i, j);
@@ -61,6 +61,13 @@ public class Encoder {
 					zigZagList.add(zigzagY);
 					zigZagList.add(zigzagCb);
 					zigZagList.add(zigzagCr);
+					
+					Entropy.loadBitstream(Entropy.getBitstream());
+					
+					DCManager.encode(zigZagList);
+					ACManager.encode(zigZagList);
+					
+					SZLReaderWriter.writeSZLFile(outputFile, height, width, quality);
 					
 					
 				}
