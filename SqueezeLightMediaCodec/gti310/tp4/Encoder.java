@@ -50,28 +50,27 @@ public class Encoder {
 					quantifiedCr = QuantizeManager.quantize(dctCr, Main.Cr, quality);
 					
 					//ZigZag
-					int[] zigzagY = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
-					int[] zigzagCb = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
-					int[] zigzagCr = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
+					int[] zigZagY = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
+					int[] zigZagCb = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
+					int[] zigZagCr = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
 					
-					zigzagY = ZigZagManager.zigzag(quantifiedY);
-					zigzagCb = ZigZagManager.zigzag(quantifiedCb);
-					zigzagCr = ZigZagManager.zigzag(quantifiedCr);
 					
-					zigZagList.add(zigzagY);
-					zigZagList.add(zigzagCb);
-					zigZagList.add(zigzagCr);
+					zigZagY = ZigZagManager.zigzag(quantifiedY);
+					zigZagCb = ZigZagManager.zigzag(quantifiedCb);
+					zigZagCr = ZigZagManager.zigzag(quantifiedCr);
 					
-					Entropy.loadBitstream(Entropy.getBitstream());
-					
-					DCManager.encode(zigZagList);
-					ACManager.encode(zigZagList);
-					
-					SZLReaderWriter.writeSZLFile(outputFile, height, width, quality);
-					
+					zigZagList.add(zigZagY);
+					zigZagList.add(zigZagCb);
+					zigZagList.add(zigZagCr);	
 					
 				}
 			}
-		}	
+		}
+		Entropy.loadBitstream(Entropy.getBitstream());
+		
+		DCManager.encode(zigZagList);
+		ACManager.encode(zigZagList);
+		
+		SZLReaderWriter.writeSZLFile(outputFile, height, width, quality);
 	}
 }

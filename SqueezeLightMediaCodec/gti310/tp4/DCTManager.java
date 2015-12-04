@@ -15,7 +15,7 @@ public class DCTManager {
 				float sum = 0;
 				for (int i = 0; i < N; i++) {
 					for (int j = 0; j < N; j++) {
-						sum += Math.cos( ( (2 * i + 1) * u * Math.PI ) / 16 ) * Math.cos( ( (2 * j + 1) * v * Math.PI ) / 16 ) * (block[layer][i][j]);
+						sum += Math.cos(((2 * i + 1) * u * Math.PI) / 16) * Math.cos(((2 * j + 1) * v * Math.PI) / 16) * (block[layer][i][j]);
 					}
 				}
 				sum *= ((C[u] * C[v]) / 4);
@@ -34,7 +34,7 @@ public class DCTManager {
 				float sum = 0;
 				for (int u = 0; u < N; u++) {
 					for (int v = 0; v < N; v++) {
-						sum += ( (C[u] * C[v]) / 4 ) * Math.cos( ( (2 * i + 1) * u * Math.PI ) / 16 ) * Math.cos( ( (2 * j + 1) * v * Math.PI ) / 16 ) * block[layer][u][v];
+						sum += ((C[u] * C[v]) / 4) * Math.cos(((2 * i + 1) * u * Math.PI) / 16) * Math.cos(((2 * j + 1) * v * Math.PI) / 16) * (block[layer][u][v]);
 					}
 				}
 				F[i][j] = Math.round(sum);
