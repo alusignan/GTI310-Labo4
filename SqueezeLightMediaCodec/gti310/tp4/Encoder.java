@@ -8,7 +8,7 @@ public class Encoder {
 	private float[][][] yCbCrImage, blocks;
 	private float[][] dctY, dctCb, dctCr;
 	private int[][] quantifiedY, quantifiedCb, quantifiedCr;
-	private ArrayList<int[]> zigZagList = new ArrayList<int[]>();
+	private ArrayList<int[][]> zigZagList = new ArrayList<int[][]>();
 
 	
 	public Encoder(String inputFile, String outputFile, int quality) {
@@ -22,6 +22,10 @@ public class Encoder {
 		//Longueur et Largeur de l'image pour boucler
 		int height = yCbCrImage[0].length;
 		int width = yCbCrImage[0][0].length;
+		
+		System.out.println("Height : " +height);
+		System.out.println("Width : " +width);
+		System.out.println("Quality factor : " +quality);
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
@@ -45,16 +49,13 @@ public class Encoder {
 					int[] zigZagCb = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
 					int[] zigZagCr = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
 					
-					//Zigzag
-					zigZagY = ZigZagManager.zigzag(quantifiedY);
-					zigZagCb = ZigZagManager.zigzag(quantifiedCb);
-					zigZagCr = ZigZagManager.zigzag(quantifiedCr);
+					int[][] zigZagArray = new int[Main.COLOR_SPACE_SIZE][Main.BLOCK_SIZE * Main.BLOCK_SIZE];
 					
-					//Ajout des Zigzag à la liste
-					zigZagList.add(zigZagY);
-					zigZagList.add(zigZagCb);
-					zigZagList.add(zigZagCr);	
+					zigZagArray[Main.Y] = ZigZagManager.zigzag(quantifiedY);
+					zigZagArray[Main.Cb] = ZigZagManager.zigzag(quantifiedCb);
+					zigZagArray[Main.Cr] = ZigZagManager.zigzag(quantifiedCr);
 					
+					zigZagList.add(zigZagArray);
 				}
 			}
 		}
@@ -62,8 +63,12 @@ public class Encoder {
 		Entropy.loadBitstream(Entropy.getBitstream());
 		
 		//Effectue opération AC-DC
-		DCManager.encode(zigZagList);
-		ACManager.encode(zigZagList);
+		for (int layer = 0; layer < Main.COLOR_SPACE_SIZE; layer++) {
+			DCManager.encode(zigZagList, layer);
+			ACManager.encode(zigZagList, layer);
+			System.out.println(layer);
+		}
+		
 		
 		//Écrit le fichier SZL
 		SZLReaderWriter.writeSZLFile(outputFile, height, width, quality);

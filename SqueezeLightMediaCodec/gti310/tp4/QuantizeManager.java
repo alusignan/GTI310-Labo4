@@ -90,17 +90,17 @@ public class QuantizeManager {
 				for (int v = 0; v < Main.BLOCK_SIZE; v++) {
 					//Facteur entre 1 et 50
 					if ((quality >= 1) && (quality <= 50 )) {
-						float a = 50 / quality;
+						float a = 50 / (float)quality;
 						F[u][v] = Math.round((matrix[u][v]) * (a  * QY[u][v]));
 					}
 					//Facteur entre 51 et 99
 					else if ((quality >= 51) && (quality <= 99)) {
-						float a = ((200 - 2 * quality) / 100);
+						float a = ((200 - (2 * (float)quality)) / 100);
 						F[u][v] = Math.round((matrix[u][v]) * (a  * QY[u][v]));
 					}
 					//Facteur 100 loseless JPEG
 					else if (quality == 100) {
-						F[u][v] = QY[u][v];
+						F[u][v] = (int) matrix[u][v];
 					}
 				}
 			}
@@ -111,17 +111,17 @@ public class QuantizeManager {
 				for (int v = 0; v < Main.BLOCK_SIZE; v++) {
 					//Facteur entre 1 et 50
 					if ((quality >= 1) && (quality <= 50 )) {
-						float a = 50 / quality;
+						float a = 50 / (float)quality;
 						F[u][v] = Math.round((matrix[u][v]) * (a  * QCbCr[u][v]));
 					}
 					//Facteur entre 51 et 99
 					else if ((quality >= 51) && (quality <= 99)) {
-						float a = ((200 - 2 * quality) / 100);
+						float a = ((200 - (2 * (float)quality)) / 100);
 						F[u][v] = Math.round((matrix[u][v]) * (a  * QCbCr[u][v]));
 					}
 					//Facteur de 100 loseless JPEG
 					else if (quality == 100) {
-						F[u][v] = QCbCr[u][v];
+						F[u][v] = (int) matrix[u][v];
 					}
 				}
 			}
