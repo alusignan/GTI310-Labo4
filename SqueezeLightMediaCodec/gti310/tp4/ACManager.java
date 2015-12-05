@@ -28,5 +28,33 @@ public class ACManager {
 			}
 		}
 	}
+	
+	public static void decode(ArrayList<int[][]> zigZagList, int layer) {
+		
+		for (int i = 0; i < zigZagList.size(); i++) {
+			int runlength = 1;
+			for (int j = 1; j < Main.BLOCK_SIZE * Main.BLOCK_SIZE; j++) {
+				int[] acData = Entropy.readAC();
+				if (acData[0] != 0) {
+					for (int k = 0; k < acData[0]; k++) {
+						zigZagList.get(i)[layer][runlength] = 0;
+						runlength += 1;
+					}
+					zigZagList.get(i)[layer][runlength] = acData[1];
+					runlength += 1;
+				}
+				else if ((acData[0] == 0) && (acData[1] == 0)) {
+					for (int k = runlength; k < Main.BLOCK_SIZE * Main.BLOCK_SIZE; k++) {
+						zigZagList.get(i)[layer][runlength] = 0;
+						runlength += 1;
+					}
+				}
+				else {
+					zigZagList.get(i)[layer][runlength] = acData[1];
+					runlength += 1;
+				}
+			}	
+		}
+	}
 
 }
