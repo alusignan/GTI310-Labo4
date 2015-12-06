@@ -49,7 +49,7 @@ public class Main {
 		 * .\media-TP4\image.szl**/
 		
 		if (args[0].equals("Programme1")) {
-			Encoder e = new Encoder(args[2], args[3], Integer.parseInt(args[1]));
+			Encoder e = new Encoder(Integer.parseInt(args[1]), args[2], args[3]);
 		}
 		
 		/**Programme 2 c'est décodeur

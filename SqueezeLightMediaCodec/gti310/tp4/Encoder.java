@@ -16,7 +16,7 @@ public class Encoder {
 	 * @param intputFile
 	 * @param outputFile
 	 * @param quality**/
-	public Encoder(String inputFile, String outputFile, int quality) {
+	public Encoder(int quality, String inputFile, String outputFile) {
 		
 		//On lit le fichier image
 		rgbImage = PPMReaderWriter.readPPMFile(inputFile);
