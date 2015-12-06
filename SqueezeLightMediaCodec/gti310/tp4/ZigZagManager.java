@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class ZigZagManager {
 	private static ArrayList<int[][][]> listToDequantize = new ArrayList<int[][][]>();
 	
-	/**Complexité O(N)**/
+	/**Complexité O(N)
+	 * Prend les blocs quantifié et crée une liste de 64 éléments**/
 	public static int[] zigzag(int[][] quantizeBlock) {
 		int[] data = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
 		int i = 1;
@@ -42,7 +43,8 @@ public class ZigZagManager {
 		return data;
 	}
 	
-	/**Complexité O(N^2)**/
+	/**Complexité O(N^2)
+	 * Prend une liste de 64 éléments et crée un bloc 8x8**/
 	public static void gazgiz(ArrayList<int[][]> zigZagList, int layer) {
 			for (int k = 0; k < zigZagList.size(); k++) {
 				if (layer == 0) {
@@ -81,7 +83,9 @@ public class ZigZagManager {
 			}
 
 	}
-
+	
+	/**Retourne la liste de bloc 8x8
+	 * **/
 	public static ArrayList<int[][][]> getIZigZagList() {
 		return listToDequantize;
 	}

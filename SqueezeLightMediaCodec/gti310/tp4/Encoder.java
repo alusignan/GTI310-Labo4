@@ -11,6 +11,11 @@ public class Encoder {
 	private ArrayList<int[][]> zigZagList = new ArrayList<int[][]>();
 
 	
+	/**Classe pour encoder un fichier PPM vers SZL.
+	 * Constitue le programme 1 de l'applicaton
+	 * @param intputFile
+	 * @param outputFile
+	 * @param quality**/
 	public Encoder(String inputFile, String outputFile, int quality) {
 		
 		//On lit le fichier image
@@ -45,17 +50,15 @@ public class Encoder {
 					quantifiedCb = QuantizeManager.quantize(dctCb, Main.Cb, quality);
 					quantifiedCr = QuantizeManager.quantize(dctCr, Main.Cr, quality);
 					
-					//Création de tableau pour stocker liste zig zag
-					int[] zigZagY = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
-					int[] zigZagCb = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
-					int[] zigZagCr = new int[Main.BLOCK_SIZE * Main.BLOCK_SIZE];
-					
+					//Tableau pour stocker les listes de 64 éléments
 					int[][] zigZagArray = new int[Main.COLOR_SPACE_SIZE][Main.BLOCK_SIZE * Main.BLOCK_SIZE];
 					
+					//Liste zigzag pour les 3 composantes
 					zigZagArray[Main.Y] = ZigZagManager.zigzag(quantifiedY);
 					zigZagArray[Main.Cb] = ZigZagManager.zigzag(quantifiedCb);
 					zigZagArray[Main.Cr] = ZigZagManager.zigzag(quantifiedCr);
 					
+					//Ajoute au tableau
 					zigZagList.add(zigZagArray);
 				}
 			}
@@ -68,7 +71,7 @@ public class Encoder {
 		for (int layer = 0; layer < Main.COLOR_SPACE_SIZE; layer++) {
 			DCManager.encode(zigZagList, layer);
 			ACManager.encode(zigZagList, layer);
-			System.out.println(layer);
+			//System.out.println(layer);
 		}
 		
 		

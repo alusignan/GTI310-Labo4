@@ -6,7 +6,9 @@ public class DCTManager {
 	private static final int N = 8;
 	private static float[] C = new float[N];
 
-	/**Complexité O(N^4)**/
+	/**Complexité O(N^4)
+	 * Calcul la DCT selon la formule.. sur les blocks 8x8
+	 * @return F**/
 	public static float[][] forwarDCT(float[][][] block, int layer) {
 		initializeCoefficients();
 		float [][] F = new float[N][N];
@@ -25,7 +27,8 @@ public class DCTManager {
 		return F;
 	}
 	
-	/**Complexité O(N^5)**/
+	/**Complexité O(N^5)
+	 * Effectue le calcul de la DCT inverse sur les blocks quantifié**/
 	public static float[][][] reverseDCT(float[][][] block) {
 		float[][][] F = new float[Main.COLOR_SPACE_SIZE][N][N];
 		initializeCoefficients();
@@ -45,7 +48,8 @@ public class DCTManager {
 		return F;
 	}
 
-	/**Complexité O(N)**/
+	/**Complexité O(N)
+	 * Rempli le tableau C**/
 	public static void initializeCoefficients() {
 		for (int i = 1; i < N; i++) {
 			C[i] = 1;

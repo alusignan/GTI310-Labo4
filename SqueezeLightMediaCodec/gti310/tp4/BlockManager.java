@@ -20,7 +20,8 @@ public class BlockManager {
 		return blockArray;
 	}
 	
-	/**Complexité O(N^4)**/
+	/**Complexité O(N^4)
+	 * Prend les blocs 8x8 et les replace afin de recréer l'image originale**/
 	public static float[][][] mergeBlocks(ArrayList<float[][][]> blockList, int height, int width) {
 		float[][][] YCbCrImage = new float[Main.COLOR_SPACE_SIZE][height][width];
 		int position = 0;

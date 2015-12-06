@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class ACManager {
 	
 	
-	/**Complexité O(N^2)**/
+	/**Complexité O(N^2)
+	 * Lit la matrice zigzag afin d'écrire les coefficients AC dans le fichier**/
 	public static void encode(ArrayList<int[][]> zigzagList, int layer) {
 		
 		for (int i = 0; i < zigzagList.size(); i++) {
@@ -29,7 +30,8 @@ public class ACManager {
 		}
 	}
 	
-	/**Complexité O(N^3)**/
+	/**Complexité O(N^3)
+	 * Lit les coefficients AC pour les placer dans une liste**/
 	public static void decode(ArrayList<int[][]> zigZagList, int layer) {
 		
 		for (int i = 0; i < zigZagList.size(); i++) {

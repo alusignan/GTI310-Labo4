@@ -6,7 +6,8 @@ public class DCManager {
 	
 
 	
-	/**Complexité O(N)**/
+	/**Complexité O(N)
+	 * Écrit les coefficient DC dans le fichier**/
 	public static void encode (ArrayList<int[][]> zigzagMatrix, int layer) {
 		Entropy.writeDC(zigzagMatrix.get(0)[layer][0]);
 		for (int i = 1; i < zigzagMatrix.size(); i++) {
@@ -15,7 +16,8 @@ public class DCManager {
 	}
 	
 	
-	/**Compexité O(N)**/
+	/**Compexité O(N)
+	 * Lit les coefficients DC du fichier SZL**/
 	public static ArrayList<int[][]> decode(int height, int width, int colorSpace, int layer) {
 		ArrayList<int[][]> listToZigZag = new ArrayList<int[][]>();
 		int zigZagMatrix[][] = new int[colorSpace][Main.BLOCK_SIZE*Main.BLOCK_SIZE];
