@@ -42,7 +42,7 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
 		
-		Encoder e = new Encoder(args[0], args[1], 49);
+		Encoder e = new Encoder(args[0], args[1], 100);
 		
 		//Decoder d = new Decoder(args[0], args[1]);
 		

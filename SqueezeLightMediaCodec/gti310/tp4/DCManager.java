@@ -15,23 +15,27 @@ public class DCManager {
 	}
 	
 	
-	/**Compexité O(N^2)**/
+	/**Compexité O(N)**/
 	public static ArrayList<int[][]> decode(int height, int width, int colorSpace, int layer) {
-		ArrayList<int[][]> zigZagList = new ArrayList<int[][]>();
-		int zigZagMatrix[][] = new int[colorSpace][Main.BLOCK_SIZE*Main.BLOCK_SIZE];
-		if (layer == 0) {
-			for (int j = 0; j < (height/Main.BLOCK_SIZE) * (width/Main.BLOCK_SIZE); j++) {
-				zigZagMatrix[layer][0] = Entropy.readDC();
-				zigZagList.add(zigZagMatrix);
-			}
+		ArrayList<int[][]> listToZigZag = new ArrayList<int[][]>();
+		for (int i = 0; i < (height/Main.BLOCK_SIZE) * (width/Main.BLOCK_SIZE); i++){
+			int zigZagMatrix[][] = new int[colorSpace][Main.BLOCK_SIZE*Main.BLOCK_SIZE];
+			zigZagMatrix[layer][0] = Entropy.readDC();
+			listToZigZag.add(zigZagMatrix);
 		}
-		else {
-			for (int j = 0; j < (height/Main.BLOCK_SIZE) * (width/Main.BLOCK_SIZE); j++) {
-				zigZagList.get(j)[layer][0] = Entropy.readDC() + zigZagList.get(j-1)[layer][0];
-			}
-		}
-		
-		return zigZagList;
+	
+//			int zigZagMatrix[][] = new int[colorSpace][Main.BLOCK_SIZE*Main.BLOCK_SIZE];
+//			listToZigZag.add(zigZagMatrix);
+//		listToZigZag.get(0)[layer][0] = Entropy.readDC();
+//		for (int j = 1; j < (height/Main.BLOCK_SIZE) * (width/Main.BLOCK_SIZE); j++) {
+//			if (layer == 0) {
+//				int zigZagMatrix[][] = new int[colorSpace][Main.BLOCK_SIZE*Main.BLOCK_SIZE];
+//				listToZigZag.add(zigZagMatrix);
+//			}
+//			listToZigZag.get(j)[layer][0] = Entropy.readDC() + listToZigZag.get(j-1)[layer][0];
+//		}
+
+		return listToZigZag;
 
 	}
 }

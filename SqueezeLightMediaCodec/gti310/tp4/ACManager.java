@@ -33,7 +33,7 @@ public class ACManager {
 		
 		for (int i = 0; i < zigZagList.size(); i++) {
 			int runlength = 1;
-			for (int j = 1; j < Main.BLOCK_SIZE * Main.BLOCK_SIZE; j++) {
+			while (runlength < 64) {
 				int[] acData = Entropy.readAC();
 				if (acData[0] != 0) {
 					for (int k = 0; k < acData[0]; k++) {

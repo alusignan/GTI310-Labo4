@@ -1,5 +1,7 @@
 package gti310.tp4;
 
+import java.util.ArrayList;
+
 public class QuantizeManager {
 	
 	//Matrice de l'énoncé pour quantification Y
@@ -81,47 +83,48 @@ public class QuantizeManager {
 	
 	/**Déquantification
 	 * Complexité en O(N^2)**/
-	public static float[][] dequantize(float[][] matrix, int layer, int quality) {
-		float[][] F = new float[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
-		
-		//Pour la couche Y
-		if (layer == 0) {
-			for (int u = 0; u < Main.BLOCK_SIZE; u++) {
-				for (int v = 0; v < Main.BLOCK_SIZE; v++) {
-					//Facteur entre 1 et 50
-					if ((quality >= 1) && (quality <= 50 )) {
-						float a = 50 / (float)quality;
-						F[u][v] = Math.round((matrix[u][v]) * (a  * QY[u][v]));
-					}
-					//Facteur entre 51 et 99
-					else if ((quality >= 51) && (quality <= 99)) {
-						float a = ((200 - (2 * (float)quality)) / 100);
-						F[u][v] = Math.round((matrix[u][v]) * (a  * QY[u][v]));
-					}
-					//Facteur 100 loseless JPEG
-					else if (quality == 100) {
-						F[u][v] = (int) matrix[u][v];
+	public static float[][][] dequantize(int[][][] matrix, int quality) {
+		float[][][] F = new float[Main.COLOR_SPACE_SIZE][Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+		for (int layer = 0; layer < Main.COLOR_SPACE_SIZE; layer++) {
+			//Pour la couche Y
+			if (layer == 0) {
+				for (int u = 0; u < Main.BLOCK_SIZE; u++) {
+					for (int v = 0; v < Main.BLOCK_SIZE; v++) {
+						//Facteur entre 1 et 50
+						if ((quality >= 1) && (quality <= 50 )) {
+							float a = 50 / (float)quality;
+							F[layer][u][v] = Math.round((matrix[layer][u][v]) * (a  * QY[u][v]));
+						}
+						//Facteur entre 51 et 99
+						else if ((quality >= 51) && (quality <= 99)) {
+							float a = ((200 - (2 * (float)quality)) / 100);
+							F[layer][u][v] = Math.round((matrix[layer][u][v]) * (a  * QY[u][v]));
+						}
+						//Facteur 100 loseless JPEG
+						else if (quality == 100) {
+							F[layer][u][v] = (int) matrix[layer][u][v];
+						}
 					}
 				}
 			}
-		}
-		//Pour les couches Cb et Cr
-		else {
-			for (int u = 0; u < Main.BLOCK_SIZE; u++) {
-				for (int v = 0; v < Main.BLOCK_SIZE; v++) {
-					//Facteur entre 1 et 50
-					if ((quality >= 1) && (quality <= 50 )) {
-						float a = 50 / (float)quality;
-						F[u][v] = Math.round((matrix[u][v]) * (a  * QCbCr[u][v]));
-					}
-					//Facteur entre 51 et 99
-					else if ((quality >= 51) && (quality <= 99)) {
-						float a = ((200 - (2 * (float)quality)) / 100);
-						F[u][v] = Math.round((matrix[u][v]) * (a  * QCbCr[u][v]));
-					}
-					//Facteur de 100 loseless JPEG
-					else if (quality == 100) {
-						F[u][v] = (int) matrix[u][v];
+			//Pour les couches Cb et Cr
+			else {
+				for (int u = 0; u < Main.BLOCK_SIZE; u++) {
+					for (int v = 0; v < Main.BLOCK_SIZE; v++) {
+						//Facteur entre 1 et 50
+						if ((quality >= 1) && (quality <= 50 )) {
+							float a = 50 / (float)quality;
+							F[layer][u][v] = Math.round((matrix[layer][u][v]) * (a  * QCbCr[u][v]));
+						}
+						//Facteur entre 51 et 99
+						else if ((quality >= 51) && (quality <= 99)) {
+							float a = ((200 - (2 * (float)quality)) / 100);
+							F[layer][u][v] = Math.round((matrix[layer][u][v]) * (a  * QCbCr[u][v]));
+						}
+						//Facteur de 100 loseless JPEG
+						else if (quality == 100) {
+							F[layer][u][v] = (int) matrix[layer][u][v];
+						}
 					}
 				}
 			}

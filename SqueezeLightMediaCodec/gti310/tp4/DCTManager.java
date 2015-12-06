@@ -25,19 +25,21 @@ public class DCTManager {
 		return F;
 	}
 	
-	/**Complexité O(N^4)**/
-	public static float[][] reverseDCT(float[][][] block, int layer) {
+	/**Complexité O(N^5)**/
+	public static float[][][] reverseDCT(float[][][] block) {
+		float[][][] F = new float[Main.COLOR_SPACE_SIZE][N][N];
 		initializeCoefficients();
-		float[][] F = new float[N][N];
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				float sum = 0;
-				for (int u = 0; u < N; u++) {
-					for (int v = 0; v < N; v++) {
-						sum += ((C[u] * C[v]) / 4) * Math.cos(((2 * i + 1) * u * Math.PI) / 16) * Math.cos(((2 * j + 1) * v * Math.PI) / 16) * (block[layer][u][v]);
+		for (int layer = 0; layer < Main.COLOR_SPACE_SIZE; layer++) {
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < N; j++) {
+					float sum = 0;
+					for (int u = 0; u < N; u++) {
+						for (int v = 0; v < N; v++) {
+							sum += ((C[u] * C[v]) / 4) * Math.cos(((2 * i + 1) * u * Math.PI) / 16) * Math.cos(((2 * j + 1) * v * Math.PI) / 16) * (block[layer][u][v]);
+						}
 					}
+					F[layer][i][j] = Math.round(sum);
 				}
-				F[i][j] = Math.round(sum);
 			}
 		}
 		return F;
