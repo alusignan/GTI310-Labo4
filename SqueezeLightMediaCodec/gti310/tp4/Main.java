@@ -50,6 +50,7 @@ public class Main {
 		
 		if (args[0].equals("Programme1")) {
 			Encoder e = new Encoder(Integer.parseInt(args[1]), args[2], args[3]);
+			System.out.println("La compression est terminée");
 		}
 		
 		/**Programme 2 c'est décodeur
@@ -59,6 +60,7 @@ public class Main {
 		 * .\media-TP4\image.ppm**/
 		else if (args[0].equals("Programme2")) {
 			Decoder d = new Decoder(args[1], args[2]);
+			System.out.println("La décompression est terminée");
 		}
 
 		

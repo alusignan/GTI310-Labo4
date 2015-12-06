@@ -1,6 +1,5 @@
 package gti310.tp4;
 
-import java.util.ArrayList;
 
 public class QuantizeManager {
 	
