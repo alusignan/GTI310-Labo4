@@ -43,7 +43,7 @@ public class QuantizeManager {
 						F[u][v] = Math.round((matrix[u][v]) / (a  * QY[u][v]));
 					}
 					//Facteur entre 51 et 99
-					else if ((quality >= 50) && (quality <= 99)) {
+					else if ((quality >= 51) && (quality <= 99)) {
 						float a = ((200 - (2 * (float)quality)) / 100);
 						F[u][v] = Math.round((matrix[u][v]) / (a  * QY[u][v]));
 						
@@ -65,7 +65,7 @@ public class QuantizeManager {
 						F[u][v] = Math.round((matrix[u][v]) / (a  * QCbCr[u][v]));
 					}
 					//Facteur entre 51 et 99
-					else if ((quality >= 50) && (quality <= 99)) {
+					else if ((quality >= 51) && (quality <= 99)) {
 						float a = (((200 - (2 * (float)quality))) / 100);
 						F[u][v] = Math.round((matrix[u][v]) / (a  * QCbCr[u][v]));
 					}

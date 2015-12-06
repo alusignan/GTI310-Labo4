@@ -27,6 +27,7 @@ public class Encoder {
 		System.out.println("Width : " +width);
 		System.out.println("Quality factor : " +quality);
 		
+		/**Complexité O(N^6)**/
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if ((i % 8 == 0) && (j % 8 == 0)) {
@@ -63,6 +64,7 @@ public class Encoder {
 		Entropy.loadBitstream(Entropy.getBitstream());
 		
 		//Effectue opération AC-DC
+		/**Complexité O(N^3)**/
 		for (int layer = 0; layer < Main.COLOR_SPACE_SIZE; layer++) {
 			DCManager.encode(zigZagList, layer);
 			ACManager.encode(zigZagList, layer);

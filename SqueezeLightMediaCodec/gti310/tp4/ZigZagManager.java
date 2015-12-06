@@ -42,9 +42,8 @@ public class ZigZagManager {
 		return data;
 	}
 	
+	/**Complexité O(N^2)**/
 	public static void gazgiz(ArrayList<int[][]> zigZagList, int layer) {
-		
-			
 			for (int k = 0; k < zigZagList.size(); k++) {
 				if (layer == 0) {
 					int[][][] data = new int[Main.COLOR_SPACE_SIZE][Main.BLOCK_SIZE][Main.BLOCK_SIZE];

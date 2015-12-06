@@ -9,9 +9,6 @@ public class Decoder {
 	private ArrayList<int[][]> iDC_Cb = new ArrayList<int[][]>();
 	private ArrayList<int[][]> iDC_Cr = new ArrayList<int[][]>();
 	private ArrayList<int[][][]> iZigZagList = new ArrayList<int[][][]>();
-	private ArrayList<float[][][]> dequantizeList = new ArrayList<float[][][]>();
-	
-	private int[][][] matrix;
 	private float[][][] dequantizeMatrix;
 	private float[][][] iDCTMatrix;
 	private ArrayList<float[][][]> iDCTMatrixList = new ArrayList<float[][][]>();
@@ -50,7 +47,8 @@ public class Decoder {
 		
 		iZigZagList = ZigZagManager.getIZigZagList();
 		
-			
+		
+		/**Complexité O(N^6)**/
 		for (int i = 0; i < iZigZagList.size(); i++) {
 			dequantizeMatrix = QuantizeManager.dequantize(iZigZagList.get(i), qualityFactor);
 			iDCTMatrix = DCTManager.reverseDCT(dequantizeMatrix);

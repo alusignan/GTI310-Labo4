@@ -29,6 +29,7 @@ public class ACManager {
 		}
 	}
 	
+	/**Complexité O(N^3)**/
 	public static void decode(ArrayList<int[][]> zigZagList, int layer) {
 		
 		for (int i = 0; i < zigZagList.size(); i++) {

@@ -41,11 +41,25 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
+		/**Programme 1 c'est l'encodeur
+		 * Configuration:
+		 * Programme1
+		 * facteur de qualité
+		 * .\media-TP4\image.ppm
+		 * .\media-TP4\image.szl**/
 		
-		Encoder e = new Encoder(args[0], args[1], 100);
+		if (args[0].equals("Programme1")) {
+			Encoder e = new Encoder(args[2], args[3], Integer.parseInt(args[1]));
+		}
 		
-		//Decoder d = new Decoder(args[0], args[1]);
-		
+		/**Programme 2 c'est décodeur
+		 * Configuration:
+		 * Programme2
+		 * .\media-TP4\image.szl
+		 * .\media-TP4\image.ppm**/
+		else if (args[0].equals("Programme2")) {
+			Decoder d = new Decoder(args[1], args[2]);
+		}
 
 		
 	}
