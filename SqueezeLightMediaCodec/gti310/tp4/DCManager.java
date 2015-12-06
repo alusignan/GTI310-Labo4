@@ -19,9 +19,11 @@ public class DCManager {
 	public static ArrayList<int[][]> decode(int height, int width, int colorSpace, int layer) {
 		ArrayList<int[][]> listToZigZag = new ArrayList<int[][]>();
 		int zigZagMatrix[][] = new int[colorSpace][Main.BLOCK_SIZE*Main.BLOCK_SIZE];
-		for (int i = 0; i < (height/Main.BLOCK_SIZE) * (width/Main.BLOCK_SIZE); i++){
-			zigZagMatrix[layer][0] = Entropy.readDC();
-			listToZigZag.add(zigZagMatrix);
+		zigZagMatrix[layer][0] = Entropy.readDC();
+		listToZigZag.add(zigZagMatrix);
+		for (int i = 1; i < (height/Main.BLOCK_SIZE) * (width/Main.BLOCK_SIZE); i++){
+			listToZigZag.add(new int[colorSpace][Main.BLOCK_SIZE * Main.BLOCK_SIZE]);
+			listToZigZag.get(i)[layer][0] = Entropy.readDC() + listToZigZag.get(i-1)[layer][0];
 		}
 		return listToZigZag;
 	}
