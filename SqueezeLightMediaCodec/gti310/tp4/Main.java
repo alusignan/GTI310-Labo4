@@ -49,8 +49,14 @@ public class Main {
 		 * .\media-TP4\image.szl**/
 		
 		if (args[0].equals("Programme1")) {
-			Encoder e = new Encoder(Integer.parseInt(args[1]), args[2], args[3]);
-			System.out.println("La compression est terminée");
+			if ((Integer.parseInt(args[1]) <= 0) || (Integer.parseInt(args[1]) >= 101)) {
+				System.out.println("Impossible de procéder avec le facteur de qualité suivant : " +args[1] );
+			} 
+			else {
+				Encoder e = new Encoder(Integer.parseInt(args[1]), args[2], args[3]);
+				System.out.println("La compression est terminée");
+			}
+
 		}
 		
 		/**Programme 2 c'est décodeur
